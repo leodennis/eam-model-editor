@@ -43,7 +43,7 @@
   </elements>
   <elements xsi:type="enotation:Shape">
     <semanticElement uri="//@node.5/@host.0"/>
-    <position x="995.8908322289426" y="803.6267450022382"/>
+    <position x="69.24083734256033" y="812.9679747893992"/>
     <size width="179.96875" height="151.0"/>
   </elements>
   <elements xsi:type="enotation:Shape">
@@ -68,12 +68,12 @@
   </elements>
   <elements xsi:type="enotation:Shape">
     <semanticElement uri="//@node.5"/>
-    <position x="994.7246836103031" y="476.64950668081815"/>
+    <position x="64.3381968090565" y="474.7812607233859"/>
     <size width="184.4375" height="184.0"/>
   </elements>
   <elements xsi:type="enotation:Shape">
     <semanticElement uri="//@node.4"/>
-    <position x="679.4929446824556" y="1066.5182408438145"/>
+    <position x="374.96885362100335" y="1070.254732758679"/>
     <size width="163.328125" height="151.0"/>
   </elements>
   <elements xsi:type="enotation:Shape">

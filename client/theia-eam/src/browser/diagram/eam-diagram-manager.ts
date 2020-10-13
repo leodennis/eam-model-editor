@@ -17,7 +17,8 @@ import {
     GLSPNotificationManager
 } from "@eclipse-glsp/theia-integration/lib/browser";
 import { MessageService } from "@theia/core";
-import { WidgetManager } from "@theia/core/lib/browser";
+import { WidgetManager, WidgetOpenerOptions } from "@theia/core/lib/browser";
+import URI from "@theia/core/lib/common/uri";
 import { EditorManager } from "@theia/editor/lib/browser";
 import { inject, injectable } from "inversify";
 import { DiagramServer, ModelSource, RequestModelAction, TYPES } from "sprotty";
@@ -63,6 +64,10 @@ export class EAMDiagramManager extends GLSPDiagramManager {
     get diagramConnector() {
         return this._diagramConnector;
     }
+
+    createWidgetFromURI(uri: URI, options?: WidgetOpenerOptions): Promise<GLSPDiagramWidget> {
+        return this.getOrCreateWidget(uri, options) as Promise<GLSPDiagramWidget>;
+    }
 }
 
 export class EAMDiagramWidget extends GLSPDiagramWidget {
@@ -83,6 +88,8 @@ export class EAMDiagramWidget extends GLSPDiagramWidget {
             ...this.options
         }));
         this.actionDispatcher.dispatch(new RequestTypeHintsAction(this.options.diagramType));
-        this.actionDispatcher.dispatch(new EnableToolPaletteAction());
+        if (! (<any>this.options).highliteDifferences) {
+            this.actionDispatcher.dispatch(new EnableToolPaletteAction());
+        }
     }
 }

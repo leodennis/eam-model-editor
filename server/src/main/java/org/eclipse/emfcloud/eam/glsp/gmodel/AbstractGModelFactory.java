@@ -18,8 +18,10 @@ package org.eclipse.emfcloud.eam.glsp.gmodel;
 import java.util.UUID;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emfcloud.eam.glsp.model.EAMModelState;
 import org.eclipse.glsp.graph.GModelElement;
+import org.emfcloud.compare.model_comparison.UUID_Provider;
 
 public abstract class AbstractGModelFactory<T extends EObject, E extends GModelElement> {
 
@@ -35,10 +37,16 @@ public abstract class AbstractGModelFactory<T extends EObject, E extends GModelE
 
 	protected String toId(EObject semanticElement) {
 		String id = modelState.getIndex().getSemanticId(semanticElement).orElse(null);
-		if (id == null) {
+
+		if (id == null ) {
 			id = UUID.randomUUID().toString();
 			modelState.getIndex().indexSemantic(id, semanticElement);
 		}
+
+		if (modelState.getClientOptions().get("useStaticIds") != null && modelState.getClientOptions().get("useStaticIds").equals("true")) {
+			id = UUID_Provider.getUUID(semanticElement);
+		}
+		
 		return id;
 	}
 

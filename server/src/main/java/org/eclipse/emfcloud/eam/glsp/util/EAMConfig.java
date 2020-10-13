@@ -34,6 +34,7 @@ public final class EAMConfig {
 		public static final String ATTRIBUTE_NAME = "label:attribute-name";
 		public static final String EDGE_COMMUNICATION = "edge:communication";
 		public static final String EDGE_ASSOCIATION = "edge:association";
+		public static final String EDGE_ASSOCIATION_CONTAINMENT = "edge:association-containment";
 
 		private Types() {
 		};
@@ -44,8 +45,8 @@ public final class EAMConfig {
 		public static final String NODE = "eam-node";
 		public static final String FOREIGN_PACKAGE = "foreign-package";;
 		public static final String EAM_EDGE = "eam-edge";
-		public static final String EAM_EDGE_COMMUNICATION  = "eam-edge-comunication";
-		public static final String EAM_EDGE_ASSOCIATION  = "eam-edge-association";
+		public static final String EAM_EDGE_COMMUNICATION  = "comunication";
+		public static final String EAM_EDGE_ASSOCIATION  = "association";
 		public static final String ITALIC = "italic";
 
 		private CSS() {

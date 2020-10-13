@@ -13,41 +13,119 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-import * as path from "path";
 import { RawProcess, RawProcessFactory } from "@theia/process/lib/node/raw-process";
 import { inject, injectable } from "inversify";
 import { ILogger } from "@theia/core";
-
-//const os = require('os');
+import { ComparisonExtensionConfiguration } from "../browser/comparison-extension-configuration";
 
 @injectable()
 export class ComparisonServerExtensionConnection {
 
   constructor(
     @inject(RawProcessFactory) protected readonly processFactory: RawProcessFactory,
+    @inject(ComparisonExtensionConfiguration) protected readonly config: ComparisonExtensionConfiguration,
     @inject(ILogger) private readonly logger: ILogger) { }
 
-  public compare(left: string, right: string, origin: string): Promise<string> {
-    const jarPath = path.resolve(__dirname, '..', '..',
-        'server', 'model-comparison-1.0.jar');
+  public compare(left: string, right: string, origin: string, merges: string): Promise<string> {
+    const jarPath = this.config.getComparisonJarPath();
     if (jarPath.length === 0) {
-        throw new Error('model-comparison-1.0.jar not found');
+        throw new Error('model-comparison jar not found');
     }
 
     const command = 'java';
     const args: string[] = [];
-    /*
-    let platformWorkspacePath = workspacePath;
-    if (os.platform() === 'win32') {
-        platformWorkspacePath = workspacePath.substr(1);
-    }
-    */
 
     args.push(
         '-jar', jarPath,
         '-operation', 'comparison',
         '-left', left,
-        '-right', right //, '-origin', platformWorkspacePath
+        '-right', right,
+        '-origin', origin,
+        '-merges', merges
+    );
+
+    return new Promise(resolve => {
+        const process = this.spawnProcess(command, args);
+        if (process === undefined || process.process === undefined || process === null || process.process === null) {
+            resolve('Process not spawned');
+            return;
+        }
+
+        let out = "";
+        const stdout = process.process.stdout;
+        if (stdout) {
+          stdout.on('data', data => {
+            out += data;
+          });
+        }
+
+        process.process.on('exit', (code: any) => {
+          switch (code) {
+              case 0: resolve(out); break;
+              case -10: resolve('Custom ERROR (TODO)'); break;
+              default: resolve('UNKNOWN ERROR'); break;
+          }
+        });
+    });
+  }
+
+  public highlight(left: string, right: string): Promise<string> {
+    const jarPath = this.config.getComparisonJarPath();
+    if (jarPath.length === 0) {
+        throw new Error('model-comparison jar not found');
+    }
+
+    const command = 'java';
+    const args: string[] = [];
+
+    args.push(
+        '-jar', jarPath,
+        '-operation', 'highlight',
+        '-left', left,
+        '-right', right
+    );
+
+    return new Promise(resolve => {
+        const process = this.spawnProcess(command, args);
+        if (process === undefined || process.process === undefined || process === null || process.process === null) {
+            resolve('Process not spawned');
+            return;
+        }
+
+        let out = "";
+        const stdout = process.process.stdout;
+        if (stdout) {
+          stdout.on('data', data => {
+            out += data;
+          });
+        }
+
+        process.process.on('exit', (code: any) => {
+          switch (code) {
+              case 0: resolve(out); break;
+              case -10: resolve('Custom ERROR (TODO)'); break;
+              default: resolve('UNKNOWN ERROR'); break;
+          }
+        });
+    });
+  }
+
+  public merge(left: string, right: string, origin: string, merges: string, mergeConflicts: string): Promise<string> {
+    const jarPath = this.config.getComparisonJarPath();
+    if (jarPath.length === 0) {
+        throw new Error('model-comparison jar not found');
+    }
+
+    const command = 'java';
+    const args: string[] = [];
+
+    args.push(
+        '-jar', jarPath,
+        '-operation', 'merge',
+        '-left', left,
+        '-right', right,
+        '-origin', origin,
+        '-merges', merges
     );
 
     return new Promise(resolve => {
@@ -94,7 +172,7 @@ export class ComparisonServerExtensionConnection {
 
   private logError(data: string | Buffer) {
     if (data) {
-        this.logger.error(`Ecore Gen: ${data}`);
+        this.logger.error(`Framework connection: ${data}`);
     }
   }
 

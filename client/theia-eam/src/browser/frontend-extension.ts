@@ -28,7 +28,7 @@ import { CommandContribution } from "@theia/core";
 //import { EAMGraphicalComparisonOpener } from "./graphical-comparison-opener";
 
 import { EAMGraphicalComparisonOpener } from "./graphical-comparison-opener";
-import { GraphicalComparisonOpener } from "comparison-extension/lib/browser/graphical-comparison-opener";
+import { GraphicalComparisonOpener } from 'comparison-extension/lib/browser/graphical/graphical-comparison-opener';
 
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {

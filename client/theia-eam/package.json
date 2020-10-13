@@ -13,11 +13,11 @@
       "lib",
       "src"
     ],
-    "homepage": "https://github.com/leodennis/eam-editor.git",
-    "bugs": "https://github.com/leodennis/eam-editor.git",
+    "homepage": "https://github.com/leodennis/eam-model-editor",
+    "bugs": "https://github.com/leodennis/eam-model-editor",
     "repository": {
       "type": "git",
-      "url": "https://github.com/leodennis/eam-editor.git"
+      "url": "https://github.com/leodennis/eam-model-editor"
     },
     "dependencies": {
       "@eclipse-glsp/theia-integration": "next",

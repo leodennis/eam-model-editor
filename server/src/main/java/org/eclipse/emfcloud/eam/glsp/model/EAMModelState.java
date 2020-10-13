@@ -15,6 +15,9 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.eam.glsp.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emfcloud.eam.glsp.EAMEditorContext;
 import org.eclipse.emfcloud.eam.glsp.EAMFacade;
@@ -26,6 +29,7 @@ import org.eclipse.glsp.server.model.ModelStateImpl;
 public class EAMModelState extends ModelStateImpl implements GraphicalModelState {
 
 	private EAMEditorContext editorContext;
+	private Map<String, String> highlight = new HashMap<>();
 
 	public static EAMModelState getModelState(GraphicalModelState state) {
 		if (!(state instanceof EAMModelState)) {
@@ -60,4 +64,11 @@ public class EAMModelState extends ModelStateImpl implements GraphicalModelState
 		return EAMModelIndex.get(getRoot());
 	}
 
+	public Map<String, String> getHighlight() {
+		return highlight;
+	}
+
+	public void setHighlight(Map<String, String> map) {
+		this.highlight = map;
+	}
 }

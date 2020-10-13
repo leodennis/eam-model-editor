@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<eam:Landscape xmi:version="2.0" xmlns:xmi="http://www.example.org/EAM_Metamodel" xmlns:eam="http://www.example.org/EAM_Metamodel" name="test" nsURI="test" nsPrefix="test">
-
-</eam:Landscape>

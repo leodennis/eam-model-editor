@@ -1,0 +1,50 @@
+.fillRed {
+    fill: #F88F6F !important;
+}
+
+.fillGreen {
+    fill: #81BA66 !important;
+}
+
+.fillBlue {
+    fill: #85C1E9 !important;
+}
+
+.outlineRed {
+    outline: solid 3px red;
+    outline-offset: 2px;
+}
+
+.outlineGreen {
+    outline: solid 3px green;
+    outline-offset: 2px;
+}
+
+.outlineBlue {
+    outline: solid 3px blue;
+    outline-offset: 2px;
+}
+
+.strokeRed {
+    stroke: red;
+}
+
+.strokeRed .diamond {
+    fill: red !important;
+}
+
+.strokeGreen {
+    stroke: green;
+}
+
+.strokeGreen .diamond {
+    fill: green !important;
+}
+
+.strokeBlue {
+    stroke: blue;
+}
+
+.strokeBlue .diamond {
+    fill: blue !important;
+}

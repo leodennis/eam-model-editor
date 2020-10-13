@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.emfcloud.eam.glsp.model.EAMModelState;
 import org.eclipse.glsp.api.action.Action;
 import org.eclipse.glsp.api.action.kind.SaveModelAction;
+import org.eclipse.glsp.api.action.kind.SetDirtyStateAction;
 import org.eclipse.glsp.api.model.GraphicalModelState;
 import org.eclipse.glsp.api.handler.ActionHandler;
 
@@ -41,7 +42,7 @@ public class EAMSaveModelActionHandler implements ActionHandler {
 		if (action instanceof SaveModelAction) {
 			EAMModelState.getResourceManager(modelState).save();
 		}
-		return List.of();
+		modelState.saveIsDone();
+		return List.of(new SetDirtyStateAction(modelState.isDirty()));
 	}
-
 }

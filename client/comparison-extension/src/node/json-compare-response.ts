@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 interface JSONCompareResponse {
-    overviewTree: any;
-    leftTree: any;
-    rightTree: any;
-    conflicts: string;
+    overviewTree: any[];
+    leftTree: any[];
+    rightTree: any[];
+    uuidConnection: any;
     error: string;
 }
     

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ASCII"?>
+<enotation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:enotation="http://www.eclipsesource.com/glsp/ecore/notation">
+  <semanticElement uri="/"/>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.0"/>
+    <position x="693.0" y="190.0"/>
+    <size width="193.328125" height="184.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.1"/>
+    <position x="326.7298382972889" y="185.92227829797446"/>
+    <size width="193.328125" height="184.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.2"/>
+    <position x="708.0" y="445.0"/>
+    <size width="161.0625" height="184.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.3"/>
+    <position x="332.0" y="448.0"/>
+    <size width="184.4375" height="184.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.4"/>
+    <position x="690.5440519141789" y="973.3997940363978"/>
+    <size width="194.3125" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.5"/>
+    <position x="344.7364919148645" y="976.8786280837644"/>
+    <size width="163.328125" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.6"/>
+    <position x="313.74314553243994" y="723.1392110600812"/>
+    <size width="184.421875" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.7"/>
+    <position x="711.7431455324399" y="744.1392110600812"/>
+    <size width="184.421875" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.4/@host.0"/>
+    <position x="692.8828051092581" y="751.6909183657608"/>
+    <size width="184.421875" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.5/@host.0"/>
+    <position x="330.79527138307174" y="743.842874364407"/>
+    <size width="184.421875" height="151.0"/>
+  </elements>
+  <elements xsi:type="enotation:Shape">
+    <semanticElement uri="//@node.6"/>
+    <position x="1016.7580449130744" y="439.8206317461082"/>
+    <size width="193.328125" height="184.0"/>
+  </elements>
+</enotation:Diagram>

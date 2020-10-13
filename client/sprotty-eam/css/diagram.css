@@ -124,6 +124,10 @@ svg {
     fill: var(--sprotty-edge);
 }
 
+.eam-edge>.diamond.association {
+    fill: var(--sprotty-edge);
+}
+
 .feedback-edge {
     stroke-width: 2px;
     stroke: black;

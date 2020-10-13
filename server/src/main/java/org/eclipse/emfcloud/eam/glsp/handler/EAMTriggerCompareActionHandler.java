@@ -23,8 +23,6 @@ import org.eclipse.glsp.api.action.Action;
 import org.eclipse.glsp.api.handler.ActionHandler;
 import org.eclipse.glsp.api.model.GraphicalModelState;
 
-import model_comparison.Model_Compare;
-
 public class EAMTriggerCompareActionHandler implements ActionHandler {
 
 	@Override
@@ -44,7 +42,7 @@ public class EAMTriggerCompareActionHandler implements ActionHandler {
 		String[] args = new String[2];
 		args[0] = "C:\\Users\\ldkpr\\Desktop\\ws\\diagram_new.eam";
 		args[1] = "C:\\Users\\ldkpr\\Desktop\\ws\\diagram.eam";
-		Model_Compare.compare(args);
+		//Model_Compare.compare(args);
 
 		return List.of(new TriggerCompareReturnAction());
 	}

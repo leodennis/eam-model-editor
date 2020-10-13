@@ -18,6 +18,10 @@ package org.eclipse.emfcloud.eam.glsp;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.command.BasicCommandStack;
@@ -32,6 +36,7 @@ import org.eclipse.emfcloud.eam.enotation.EnotationPackage;
 import org.eclipse.emfcloud.eam.glsp.model.EAMModelState;
 import org.eclipse.glsp.api.jsonrpc.GLSPServerException;
 import org.eclipse.glsp.api.utils.ClientOptions;
+import org.emfcloud.compare.model_comparison.Model_Compare;
 
 import EAM_Metamodel.EAM_MetamodelPackage;
 
@@ -51,6 +56,11 @@ public class ResourceManager {
 				.orElseThrow(() -> new GLSPServerException("No source uri given to load model!"));
 		if (!sourceURI.endsWith(EAM_EXTENSION) && !sourceURI.endsWith(NOTATION_EXTENSION)) {
 			throw new GLSPServerException("Could not setup ResourceManager: \n Invalid file extension: " + sourceURI);
+		}
+		
+		if (modelState.getClientOptions().get("highlights") != null) {
+			HashMap<String, String> map = new Gson().fromJson(modelState.getClientOptions().get("highlights"), HashMap.class);
+			modelState.setHighlight(map);
 		}
 
 		this.baseSourceUri = sourceURI.substring(0, sourceURI.lastIndexOf('.'));

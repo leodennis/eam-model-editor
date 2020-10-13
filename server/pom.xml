@@ -11,6 +11,10 @@
 			<name>Sonatype</name>
 			<url>https://oss.sonatype.org/content/groups/public</url>
 		</repository>
+		<repository>
+			<id>localrepository</id>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
 	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,11 +48,11 @@
 			<version>2.14.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>model_comparison</groupId>
-		    <artifactId>model_comparison</artifactId>
+		    <groupId>org.emfcloud.compare.model_comparison</groupId>
+		    <artifactId>org.emfcloud.compare.model_comparison</artifactId>
 		    <version>1.0</version>
 		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/model_comparison.jar</systemPath>
+		    <systemPath>${pom.basedir}/lib/model-comparison-1.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 

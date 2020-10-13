@@ -60,12 +60,27 @@ export class SCompartmentAttributeView implements SCompartmentView {
 }
 
 @injectable()
+export class DiamondEdgeView extends PolylineEdgeView {
+  protected renderAdditionals(edge: SEdge, segments: Point[], context: RenderingContext): VNode[] {
+    const p1 = segments[0];
+    const p2 = segments[1];
+    const r = 8;
+    const rhombStr = "M 0,0 l" + r + "," + (r / 2) + " l" + r + ",-" + (r / 2) + " l-" + r + ",-" + (r / 2) + " l-" + r + "," + (r / 2) + " Z";
+    const firstEdgeAngle = angle(p1, p2);
+    return [
+      <path class-association={true} class-diamond={true} d={rhombStr}
+        transform={`rotate(${firstEdgeAngle} ${p1.x} ${p1.y}) translate(${p1.x} ${p1.y})`} />
+    ];
+  }
+}
+
+@injectable()
 export class ArrowEdgeView extends PolylineEdgeView {
   protected renderAdditionals(edge: SEdge, segments: Point[], context: RenderingContext): VNode[] {
     const p1 = segments[segments.length - 2];
     const p2 = segments[segments.length - 1];
     return [
-      <path class-sprotty-edge={true} d="M 10,-4 L 0,0 L 10,4"
+      <path d="M 10,-4 L 0,0 L 10,4"
         transform={`rotate(${angle(p2, p1)} ${p2.x} ${p2.y}) translate(${p2.x} ${p2.y})`} />,
     ];
   }
@@ -79,9 +94,9 @@ export class AssociationEdgeView extends ArrowEdgeView {
         const target1 = segments[segments.length - 2];
         const target2 = segments[segments.length - 1];
         return [
-            <path class-sprotty-edge={true} class-triangle={true} class-association={true} d="M 12,-4 L 0,0 L 12,4"
+            <path class-triangle={true} class-association={true} d="M 12,-4 L 0,0 L 12,4"
                   transform={`rotate(${angle(target2, target1)} ${target2.x} ${target2.y}) translate(${target2.x} ${target2.y})`} />,
-            <path class-sprotty-edge={true} class-triangle={true} class-association={true} d="M 12,-4 L 0,0 L 12,4"
+            <path class-triangle={true} class-association={true} d="M 12,-4 L 0,0 L 12,4"
                   transform={`rotate(${angle(source1, source2)} ${source1.x} ${source1.y}) translate(${source1.x} ${source1.y})`} />,
         ];
     }

@@ -13,53 +13,45 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-//import { injectable, inject } from 'inversify';
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 
-import { WidgetManager } from '@theia/core/lib/browser';
 import URI from '@theia/core/lib/common/uri';
-import {GraphicalComparisonOpener} from 'comparison-extension/lib/browser/graphical-comparison-opener';
-//import { EAMDiagramManager } from './diagram/eam-diagram-manager';
-//import { EAMLanguage } from '../common/eam-language';
-//import { DiagramWidgetOptions } from "sprotty-theia";
+import { GraphicalComparisonOpener } from 'comparison-extension/lib/browser/graphical/graphical-comparison-opener';
+import { ComparisonBackendService } from "comparison-extension/lib/common/protocol";
+import { EAMDiagramManager } from './diagram/eam-diagram-manager';
+import { GLSPDiagramWidget } from '@eclipse-glsp/theia-integration/lib/browser';
 
 @injectable()
 export class EAMGraphicalComparisonOpener extends GraphicalComparisonOpener {
 
-  /*
   constructor(
-    @inject(EAMDiagramManager) private readonly diagramManager: EAMDiagramManager) {
-    super();
+    @inject(EAMDiagramManager) private readonly diagramManager: EAMDiagramManager,
+    @inject(ComparisonBackendService) readonly comparisonBackendService: ComparisonBackendService) {
+    super(comparisonBackendService);
   }
-  */
 
- // EAMDiagramManager
-
-    showWidgets(widgetManager: WidgetManager, left: URI, right: URI) {
-      /*
-      const options: DiagramWidgetOptions = {
-        uri: String(left),
-        diagramType: EAMLanguage.DiagramType,
-        iconClass: "fa fa-project-diagram",
-        label: EAMLanguage.Label + " Editor"
-      };
-      this.diagramManager.createWidget(options).then(widget => {
-        widget.show();
-        //console.log(widget);
-      });
-
-       */
-      throw Error("Custom error");
-
-      /*
-      super({
-        widgetId: ComparisonTreeEditorWidget.WIDGET_ID,
-        widgetName: ComparisonTreeEditorWidget.WIDGET_LABEL,
-        defaultWidgetOptions: {
-            area: 'main',
-            mode: 'open-to-left' //open-to-right   ? -> split-left
+  async getLeftDiagram(uri: URI, highlights: any): Promise<GLSPDiagramWidget> {
+      const options: any = {
+        widgetOptions: {
+          highliteDifferences: true,
+          highlights: highlights,
+          useStaticIds: true
         }
-     });
-    */
-    }
+      };
+
+      return this.diagramManager.createWidgetFromURI(uri, options);
+  }
+
+  async getRightDiagram(uri: URI, highlights: any): Promise<GLSPDiagramWidget> {
+    const options: any = {
+      widgetOptions: {
+        highliteDifferences: true,
+        highlights: highlights,
+        useStaticIds: true
+      }
+    };
+
+    return this.diagramManager.createWidgetFromURI(uri, options);
+  }
+
 }

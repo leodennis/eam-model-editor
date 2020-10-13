@@ -10,6 +10,8 @@
  ********************************************************************************/
 import "@eclipse-glsp/client/css/glsp-sprotty.css";
 import "sprotty/css/edit-label.css";
+import "../css/highlights.css";
+
 
 import {
     boundsModule,
@@ -78,7 +80,7 @@ import {
 import {
     ClassNodeView,
     SCompartmentAttributeView,
-    AssociationEdgeView,
+    AssociationEdgeView, DiamondEdgeView
 } from "./views";
 import { EditLabelUIAutocomplete } from "./features/edit-label-autocomplete";
 
@@ -114,6 +116,7 @@ export default (containerId: string) => {
         configureModelElement(context, 'routing-point', SRoutingHandle, SRoutingHandleView);
         configureModelElement(context, 'volatile-routing-point', SRoutingHandle, SRoutingHandleView);
         configureModelElement(context, 'edge:association', SEdge, PolylineEdgeView);
+        configureModelElement(context, 'edge:association-containment', SEdge, DiamondEdgeView);
         configureModelElement(context, 'edge:communication', ArrowEdge, AssociationEdgeView);
         configureModelElement(context, 'edge', SEdge, PolylineEdgeView);
         configureViewerOptions(context, {

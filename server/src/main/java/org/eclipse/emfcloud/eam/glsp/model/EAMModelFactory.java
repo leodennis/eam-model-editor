@@ -33,6 +33,10 @@ public class EAMModelFactory implements ModelFactory {
 		EAMModelState modelState = EAMModelState.getModelState(graphicalModelState);
 		graphicalModelState.setClientOptions(action.getOptions());
 
+		if (modelState == null) {
+			throw new NullPointerException("EAMModelFactory: EAMModelState is null!");
+		}
+
 		EAMEditorContext context = new EAMEditorContext(modelState);
 
 		modelState.setEditorContext(context);

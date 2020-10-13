@@ -16,7 +16,9 @@
 package org.eclipse.emfcloud.eam.glsp.gmodel;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emfcloud.eam.enotation.Shape;
 import org.eclipse.emfcloud.eam.glsp.model.EAMModelState;
 import org.eclipse.emfcloud.eam.glsp.util.EAMConfig.CSS;
@@ -30,6 +32,7 @@ import org.eclipse.glsp.graph.builder.impl.GLayoutOptions;
 import org.eclipse.glsp.graph.builder.impl.GNodeBuilder;
 import org.eclipse.glsp.graph.util.GConstants;
 import org.eclipse.glsp.graph.util.GraphUtil;
+import org.emfcloud.compare.model_comparison.UUID_Provider;
 
 import EAM_Metamodel.EAM_Application;
 import EAM_Metamodel.EAM_DataCenter;
@@ -61,20 +64,42 @@ public class ClassifierNodeFactory extends AbstractGModelFactory<EAM_Node, GNode
 
 	public GNode create(EAM_Node node, String type) {
 		List<GModelElement> children = parentFactory.createAttributeLabels(node);
-		GNodeBuilder b = new GNodeBuilder(type) //
-				.id(toId(node)) //
+		
+		String id = toId(node);
+		GNodeBuilder nodeBuilder = new GNodeBuilder(type) //
+				.id(id) //
 				.layout(GConstants.Layout.VBOX) //
 				.addCssClass(CSS.NODE) //
 				.add(buildHeader(getNodeName(node)))//
 				.add(createLabeledChildrenCompartment(children));
-		applyShapeData(node, b);
+		applyShapeData(node, nodeBuilder);
+		
+		String change = this.modelState.getHighlight().get(id);
+		if (change != null) {
+			nodeBuilder.addCssClass(changeToNodeHighlightClass(change));
+		}
 
-		GNode node2 = b.build();
+		return nodeBuilder.build();
+		/*
 		System.out.println("created element with id: " + node2.getId());
 		for (GModelElement gModelElement : children) {
 			System.out.println("  child id: " + gModelElement.getId());
 		}
+		
 		return node2;
+		*/
+	}
+
+	private String changeToNodeHighlightClass(String color) {
+		switch (color) {
+			case "red":
+				return "fillRed";
+			case "green":
+				return "fillGreen";
+			case "yellow":
+				return "fillBlue";
+		}
+		return "";
 	}
 
 	public String getNodeName(EAM_Node node) {
